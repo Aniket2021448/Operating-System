@@ -1,0 +1,6 @@
+Youtube Vids for OS assignment2(creating a simple shell)
+
+1. https://www.youtube.com/watch?v=D88H8-kQJGA (ls)
+2. https://www.youtube.com/watch?v=teu0_tEKJLw (mkdir) 
+3. https://www.youtube.com/watch?v=KClddHItjl8 (cat)
+4. 
