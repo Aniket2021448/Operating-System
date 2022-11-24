@@ -1,0 +1,53 @@
+--- linux-5.19.9--new/arch/x86/entry/syscalls/syscall_64.tbl    2022-11-23 12:58:48.019995713 +0530
++++ linux-5.19.9/arch/x86/entry/syscalls/syscall_64.tbl 2022-09-15 14:17:20.000000000 +0530
+@@ -372,7 +372,6 @@
+ 448	common	process_mrelease	      sys_process_mrelease
+ 449	common	futex_waitv		          sys_futex_waitv
+ 450	common	set_mempolicy_home_node	sys_set_mempolicy_home_node
+-451	common	kernel_2D_memcpy		    sys_kernel_2d_memcpy
+
+ #
+ # Due to a historical design error, certain syscalls are numbered differently
+@@ -416,6 +415,5 @@
+ 545  x32     execveat                compat_sys_execveat
+ 546  x32     preadv2                 compat_sys_preadv64v2
+ 547  x32     pwritev2                compat_sys_pwritev64v2
+-
+ # This is the end of the legacy x32 range. Numbers 548 and above are
+ # not special and are not to be used for x32-specific syscalls.
+--- linux-5.19.9--new/kernel/sys.c    2022-11-23 16:57:23:249977630 +0530
++++ linux-5.19.9/kernel/sys.c    2022-09-15 14:17:20.000000000 +0530
+@@ -206,16 +206,7 @@
+ out:
+        return error;
+}
+-SYSCALL_DEFINE4(kernel_2d_memcpy, float *, a, float *, b, int, n, int, m){
+-	    float t[n][m];
+-	    if(copy_from_user(&t,b,sizeof(t))!=0){
+-		      return -EFAULT;
+-	    }
+-	    if(copy_to_user(a,&t,sizeof(t))!=0){
+-		      return -EFAULT;
+-	    }	
+-	    return 0;
+-}
++
+ SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
+ {
+      struct task_struct *g, *p;
+@@ -477,7 +486,6 @@
+      return __sys_setgid(gid);
+ }
+ 
+-
+ /*
+  * change the user struct in a credentials set to match the new UID
+  */
+@@ -598,7 +588,6 @@
+        return __sys_setreuid(ruid, euid);
+ }
+ 
+ -
+ /*
+  * setgid() is implemented like SysV w/ SAVED_IDS
+  *
