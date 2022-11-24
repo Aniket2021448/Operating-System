@@ -4,7 +4,7 @@
  448	common	process_mrelease	      sys_process_mrelease
  449	common	futex_waitv		          sys_futex_waitv
  450	common	set_mempolicy_home_node	sys_set_mempolicy_home_node
--451	common	kernel_2D_memcpy		    sys_kernel_2d_memcpy
++451	common	kernel_2D_memcpy		    sys_kernel_2d_memcpy
 
  #
  # Due to a historical design error, certain syscalls are numbered differently
@@ -21,16 +21,16 @@
  out:
         return error;
 }
--SYSCALL_DEFINE4(kernel_2d_memcpy, float *, a, float *, b, int, n, int, m){
--	    float t[n][m];
--	    if(copy_from_user(&t,b,sizeof(t))!=0){
--		      return -EFAULT;
--	    }
--	    if(copy_to_user(a,&t,sizeof(t))!=0){
--		      return -EFAULT;
--	    }	
--	    return 0;
--}
++SYSCALL_DEFINE4(kernel_2d_memcpy, float *, a, float *, b, int, n, int, m){
++	    float t[n][m];
++	    if(copy_from_user(&t,b,sizeof(t))!=0){
++		      return -EFAULT;
++	    }
++	    if(copy_to_user(a,&t,sizeof(t))!=0){
++		      return -EFAULT;
++	    }	
++	    return 0;
++}
 +
  SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
  {
