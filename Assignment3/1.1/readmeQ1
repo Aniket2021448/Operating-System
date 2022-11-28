@@ -1,0 +1,5 @@
+At First, I used the pthread create function to create three threads.
+In order to associate all three functions, each thread utilises the pthread create function three times.
+After that, I used the pthread setschedparam function to set the scheduling parameters for the threads.
+I then joined the thread and used pthread setschedprio() to mark the clock for the default priority result. I recorded the timings in a file called "ques1_1.txt."
+I then utilised these numbers to create histograms in Python.
